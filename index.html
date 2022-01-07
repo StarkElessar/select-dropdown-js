@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/index.min.css">
+  <title>Custom Dropdown</title>
+</head>
+<body>
+  <!-- Обертка для страницы -->
+  <div class="wrapper">
+    <div class="container">
+      <div class="custom-dropdown">
+        <h3 class="custom-dropdown__title">Выберите категорию:</h3>
+
+        <div class="custom-dropdown__wrapper">
+          <button class="custom-dropdown__btn" type="button">Что больше по душе?</button>
+
+          <ul class="custom-dropdown__list  select-list">
+            <li data-value="comedy" class="select-list__item">Кинокомедии</li>
+            <li data-value="trash" class="select-list__item">Боевики</li>
+            <li data-value="drama" class="select-list__item">Драма - мелодрама</li>
+            <li data-value="fantasy" class="select-list__item">Фантастика</li>
+          </ul>
+
+          <input type="hidden" value="" class="custom-dropdown__input">
+        </div>
+
+      </div>
+    </div>
+    
+  </div>
+
+  <script src="./script.js"></script>
+</body>
+</html>

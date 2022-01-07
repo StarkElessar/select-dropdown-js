@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600;800&display=swap');
+
+@import 'mixins';
+@import 'vars';
+
+*,
+*::after,
+*::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Montserrat', sans-serif;
+  color: $colorMain;
+}
+
+.wrapper {
+  width: 100%;
+  height: 100vh;
+  background-color: #0093E9;
+  background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+}
+
+.container {
+  max-width: 1200px;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 $marginOffset;
+}
+
+.custom-dropdown {
+  width: 700px;
+  max-width: 700px;
+  &__title {
+    @include adaptive-value('font-size', 24, 16, 0);
+    @include adaptive-value('margin-bottom', 8, 4, 0);
+  }
+
+  &__wrapper {
+    position: relative;
+    width: 100%;
+  }
+  
+  &__btn {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0px 35px 0px 16px;
+    height: $heightBtn;
+    text-align: left;
+    border: 1px solid $colorLightBlue;
+    border-radius: 6px;
+    background-color: #fff;
+    @include adaptive-value('font-size', 16, 12, 0);
+    font-family: 'Montserrat';
+    font-weight: 600;
+    color: $colorMain;
+    cursor: pointer;
+    transition: 220ms ease;
+
+    &::after {
+      position: absolute;
+      content: '';
+      top: 50%;
+      right: 15px;
+      transform: translateY(-50%);
+
+      width: 0;
+      height: 0; 
+      border-width: 8px 5px 0 5px;
+      border-color: $colorLightBlue transparent transparent transparent;
+      border-style: solid;
+
+      pointer-events: none;
+      transition: 220ms ease;
+    }
+
+    &.custom-dropdown__btn--active {
+      &::after {
+        transform: translateY(-50%) rotate(180deg);
+      }
+    }
+    &:focus,
+    &.custom-dropdown__btn--active {
+      border: 1px solid $colorLightBlue;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(178, 198, 255, 0.6);
+    }
+  }
+}
+
+.select-list {
+  position: absolute;
+  top: $heightBtn;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  list-style-type: none;
+  background-color: transparent;
+  border: 1px solid $colorLightBlue;
+  border-radius: 6px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px 0 rgba(#000, 0.3);
+  visibility: hidden;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 250ms linear;
+
+  &.select-list--show {
+    visibility: visible;
+    opacity: 1;
+    top: $heightBtn + 8;
+  }
+
+  &__item {
+    padding: 8px 35px 8px 16px;
+    border: 1px solid $colorLightBlue;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    background-color: #fff;
+    color: $colorMain; 
+    cursor: pointer;
+    &:first-child {
+      border-top: 0;
+    }
+    &:last-child {
+      border-bottom: 0;
+    }
+    transition: 220ms ease;
+
+    &:hover {
+      background-color: rgba($colorLightBlue, 0.2);
+    }
+  }
+}
