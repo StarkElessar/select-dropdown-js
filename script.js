@@ -1,32 +1,34 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const selectBtn   = document.querySelector('.custom-dropdown__btn')
-  const selectList  = document.querySelector('.select-list')
-  const inputSelect = document.querySelector('.custom-dropdown__input')
+  document.addEventListener('click', ({ target }) => {
+    const dropdown = target.closest('[data-dropdown]')
 
-  document.addEventListener('click', (event) => {
-    const $this = event.target
+    if (dropdown) {
+      const dropdownSelectButton = dropdown.querySelector('[data-dropdown-button]')
+      const dropdownSelectList = dropdown.querySelector('[data-dropdown-list]')
+      const dropdownInput = dropdown.querySelector('input[type="hidden"]')
+      
+      if (target !== dropdownSelectButton ) {
+        dropdownSelectButton.classList.remove('_active')
+        dropdownSelectList.classList.remove('_show')
+      }
+  
+      if (target === dropdownSelectButton) {
+        dropdownSelectButton.classList.toggle('_active')
+        dropdownSelectList.classList.toggle('_show')
+      }
+  
+      if (target.hasAttribute('data-value')) {
+        dropdownSelectButton.innerText = target.dataset.value
+        dropdownInput.value = target.dataset.value
+        dropdownSelectButton.focus()
+      }
 
-    if ($this !== selectBtn ) {
-      selectBtn.classList.remove('custom-dropdown__btn--active')
-      selectList.classList.remove('select-list--show')
-    }
-
-    if ($this == selectBtn) {
-      selectBtn.classList.toggle('custom-dropdown__btn--active')
-      selectList.classList.toggle('select-list--show')
-    }
-
-    if ($this.hasAttribute('data-value')) {
-      selectBtn.innerText = $this.innerText
-      inputSelect.value   = $this.dataset.value
-      selectBtn.focus()
-    }
-  })
-
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Tab' || event.key === 'Escape') {
-      selectBtn.classList.remove('custom-dropdown__btn--active')
-      selectList.classList.remove('select-list--show')
+      dropdown.addEventListener('keydown', ({ key }) => {
+        if (key === 'Tab' || key === 'Escape') {
+          dropdownSelectButton.classList.remove('_active')
+          dropdownSelectList.classList.remove('_show')
+        }
+      })
     }
   })
 })
